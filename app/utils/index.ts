@@ -1,5 +1,5 @@
 class Generator {
-  private *idGenerator(start: number, end: number, step: number) {
+  private *generate(start: number, end: number, step: number) {
     for (let i = start; i <= end; i += step) {
       yield i + step;
     }
@@ -22,7 +22,7 @@ class Generator {
 
   constructor(config?: IDGeneratorConfig) {
     const { start, end, step } = this.getConfig(config);
-    this.newGen = this.idGenerator(start, end, step);
+    this.newGen = this.generate(start, end, step);
   }
 
   getId() {
