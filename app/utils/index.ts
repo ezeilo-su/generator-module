@@ -1,7 +1,7 @@
 class SequentialIntegerGenerator {
-  private START: number = 0;
-  private END: number = Infinity;
-  private STEP: number = 1;
+  private DEFAULT_START: number = 0;
+  private DEFAULT_END: number = Infinity;
+  private DEFAULT_STEP: number = 1;
 
   private *generate(start: number, end: number, step: number) {
     for (let i = start; i <= end; i += step) {
@@ -12,16 +12,16 @@ class SequentialIntegerGenerator {
   private getConfig(config?: IDGeneratorConfig): Required<IDGeneratorConfig> {
     if (!config) {
       return {
-        end: this.END,
-        step: this.STEP,
-        start: this.START
+        end: this.DEFAULT_END,
+        step: this.DEFAULT_STEP,
+        start: this.DEFAULT_START
       };
     }
 
     return {
-      end: config.end || this.END,
-      step: config.step || this.STEP,
-      start: config.start || this.START
+      end: config.end || this.DEFAULT_END,
+      step: config.step || this.DEFAULT_STEP,
+      start: config.start || this.DEFAULT_START
     };
   }
 
