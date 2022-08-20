@@ -1,4 +1,8 @@
-class Generator {
+class SequentialIntegerGenerator {
+  private START: number = 0;
+  private END: number = Infinity;
+  private STEP: number = 1;
+
   private *generate(start: number, end: number, step: number) {
     for (let i = start; i <= end; i += step) {
       yield i + step;
@@ -6,16 +10,19 @@ class Generator {
   }
 
   private getConfig(config?: IDGeneratorConfig): Required<IDGeneratorConfig> {
-    let start: number = 0;
-    let end: number = Infinity;
-    let step: number = 1;
-
-    if (config) {
-      end = config.end || end;
-      step = config.step || step;
-      start = config.start || start;
+    if (!config) {
+      return {
+        end: this.END,
+        step: this.STEP,
+        start: this.START
+      };
     }
-    return { start, end, step };
+
+    return {
+      end: config.end || this.END,
+      step: config.step || this.STEP,
+      start: config.start || this.START
+    };
   }
 
   private generator;
@@ -32,4 +39,4 @@ class Generator {
   }
 }
 
-export { Generator };
+export { SequentialIntegerGenerator };

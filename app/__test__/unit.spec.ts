@@ -1,8 +1,8 @@
-import { Generator } from '../utils';
+import { SequentialIntegerGenerator } from '../utils';
 
-describe('Generator class', () => {
+describe('SequentialIntegerGenerator class', () => {
   it('should return id of 1 generate with defaults (sart: 0, step: 1) if no argument is provided', () => {
-    const generator = new Generator();
+    const generator = new SequentialIntegerGenerator();
     const id = generator.getId();
     expect(id).toEqual(1);
   });
@@ -13,7 +13,7 @@ describe('Generator class', () => {
       end: 10,
       step: 2
     };
-    const generator = new Generator(generatorConfig);
+    const generator = new SequentialIntegerGenerator(generatorConfig);
     const id1 = generator.getId();
     const id2 = generator.getId();
     expect(id1).toEqual(2);
@@ -26,8 +26,8 @@ describe('Generator class', () => {
       end: 10,
       step: 2
     };
-    const firstGenerator = new Generator(generatorConfig);
-    const secondGenerator = new Generator(generatorConfig);
+    const firstGenerator = new SequentialIntegerGenerator(generatorConfig);
+    const secondGenerator = new SequentialIntegerGenerator(generatorConfig);
 
     const id1 = firstGenerator.getId();
     const id2 = secondGenerator.getId();
@@ -42,7 +42,7 @@ describe('Generator class', () => {
       step: 2
     };
     try {
-      const generator = new Generator(generatorConfig);
+      const generator = new SequentialIntegerGenerator(generatorConfig);
       generator.getId();
       generator.getId();
       generator.getId();
