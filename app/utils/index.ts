@@ -6,9 +6,13 @@ class Generator {
   }
   private newGen = this.idGenerator(this.start, this.end, this.step);
 
-  constructor(private start: number = 1, private end: number = Infinity, private step: number = 1) {}
+  constructor(
+    private start: number = 1,
+    private end: number = Infinity,
+    private step: number = 1
+  ) {}
 
-  getId () {
+  getId() {
     const { done, value } = this.newGen.next();
     if (done) throw new Error('DB full!');
     return value;
