@@ -1,16 +1,29 @@
 class Generator {
   private *idGenerator(start: number, end: number, step: number) {
-    for (let i = start; i < end; i += step) {
-      yield i;
+    for (let i = start; i <= end; i += step) {
+      yield i + step;
     }
   }
-  private newGen = this.idGenerator(this.start, this.end, this.step);
 
-  constructor(
-    private start: number = 1,
-    private end: number = Infinity,
-    private step: number = 1
-  ) {}
+  private getConfig(config?: IDGeneratorConfig): Required<IDGeneratorConfig> {
+    let start: number = 0;
+    let end: number = Infinity;
+    let step: number = 1;
+
+    if (config) {
+      end = config.end || end;
+      step = config.step || step;
+      start = config.start || start;
+    }
+    return { start, end, step };
+  }
+
+  private newGen;
+
+  constructor(config?: IDGeneratorConfig) {
+    const { start, end, step } = this.getConfig(config);
+    this.newGen = this.idGenerator(start, end, step);
+  }
 
   getId() {
     const { done, value } = this.newGen.next();

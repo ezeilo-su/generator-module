@@ -1,27 +1,48 @@
 import { Generator } from '../utils';
 
 describe('Generator class', () => {
-  test('returns instance of Generator', () => {
-    expect(new Generator()).toBeInstanceOf(Generator);
-  });
-
-  test('should have getId method ', () => {
-    expect(new Generator()).toHaveProperty('getId');
-  });
-
-  test('getId should be a function', () => {
-    expect(typeof new Generator().getId).toBe('function');
-  });
-
-  test('should return the next id', () => {
-    const generator = new Generator(1, Infinity, 1);
+  it('should return id of 1 generate with defaults (sart: 0, step: 1) if no argument is provided', () => {
+    const generator = new Generator();
     const id = generator.getId();
-    expect(generator.getId()).toEqual(Number(id) + 1);
+    expect(id).toEqual(1);
   });
 
-  test('should throw', () => {
+  it('should return the next ID with the right step', () => {
+    const generatorConfig = {
+      start: 0,
+      end: 10,
+      step: 2
+    };
+    const generator = new Generator(generatorConfig);
+    const id1 = generator.getId();
+    const id2 = generator.getId();
+    expect(id1).toEqual(2);
+    expect(id2).toEqual(4);
+  });
+
+  it('should not have any side effect', () => {
+    const generatorConfig = {
+      start: 0,
+      end: 10,
+      step: 2
+    };
+    const firstGenerator = new Generator(generatorConfig);
+    const secondGenerator = new Generator(generatorConfig);
+
+    const id1 = firstGenerator.getId();
+    const id2 = secondGenerator.getId();
+
+    expect(id1).toEqual(id2);
+  });
+
+  it('should throw when id boundary is exceeded', () => {
+    const generatorConfig = {
+      start: 0,
+      end: 5,
+      step: 2
+    };
     try {
-      const generator = new Generator(1, 3, 1);
+      const generator = new Generator(generatorConfig);
       generator.getId();
       generator.getId();
       generator.getId();

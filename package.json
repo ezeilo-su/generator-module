@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
+    "build": "rm -rf ./build && tsc",
     "test": "jest --watchAll --no-cache --coverage",
     "prettier": "prettier --config .prettierrc 'app/**/*.ts' --write"
   },
