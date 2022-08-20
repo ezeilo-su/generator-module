@@ -18,15 +18,15 @@ class Generator {
     return { start, end, step };
   }
 
-  private newGen;
+  private generator;
 
   constructor(config?: IDGeneratorConfig) {
     const { start, end, step } = this.getConfig(config);
-    this.newGen = this.generate(start, end, step);
+    this.generator = this.generate(start, end, step);
   }
 
   getId() {
-    const { done, value } = this.newGen.next();
+    const { done, value } = this.generator.next();
     if (done) throw new Error('DB full!');
     return value;
   }
