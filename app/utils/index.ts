@@ -5,6 +5,13 @@ class SequentialIntegerGenerator {
     end: Number.MAX_SAFE_INTEGER
   };
 
+  private generator;
+
+  constructor(config?: IDGeneratorConfig) {
+    const { start, end, step } = this.getConfig(config);
+    this.generator = this.generate(start, end, step);
+  }
+
   private *generate(start: number, end: number, step: number) {
     for (let i = start; i <= end; i += step) {
       yield i + step;
@@ -12,7 +19,11 @@ class SequentialIntegerGenerator {
   }
 
   private getConfig(config?: IDGeneratorConfig): Required<IDGeneratorConfig> {
-    const { end: defaultEnd, start: defaultStart, step: defaultStep } = SequentialIntegerGenerator.DEFAULT_CONFIG;
+    const {
+      end: defaultEnd,
+      start: defaultStart,
+      step: defaultStep
+    } = SequentialIntegerGenerator.DEFAULT_CONFIG;
 
     if (!config) {
       return {
@@ -27,13 +38,6 @@ class SequentialIntegerGenerator {
       step: config.step || defaultStep,
       start: config.start || defaultStart
     };
-  }
-
-  private generator;
-
-  constructor(config?: IDGeneratorConfig) {
-    const { start, end, step } = this.getConfig(config);
-    this.generator = this.generate(start, end, step);
   }
 
   getId() {

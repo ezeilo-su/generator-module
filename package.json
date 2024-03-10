@@ -7,7 +7,7 @@
     "lint": "eslint . --ext .ts",
     "build": "rm -rf ./build && tsc",
     "test": "jest --watchAll --no-cache --coverage",
-    "prettier": "prettier --config .prettierrc 'app/**/*.ts' --write"
+    "format": "prettier --config .prettierrc 'app/**/*.ts' --write"
   },
   "jest": {
     "preset": "ts-jest",
