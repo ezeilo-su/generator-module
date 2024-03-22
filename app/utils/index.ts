@@ -1,3 +1,9 @@
+interface IDGeneratorConfig {
+  end?: number;
+  step?: number;
+  start?: number;
+}
+
 class SequentialIntegerGenerator {
   private static DEFAULT_CONFIG: Required<IDGeneratorConfig> = {
     start: 0,
