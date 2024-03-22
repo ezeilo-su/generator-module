@@ -24,25 +24,20 @@ class SequentialIntegerGenerator {
     }
   }
 
-  private getConfig(config?: IDGeneratorConfig): Required<IDGeneratorConfig> {
+  private getConfig(
+    config: IDGeneratorConfig = {}
+  ): Required<IDGeneratorConfig> {
+    const { start, end, step } = config;
     const {
       end: defaultEnd,
       start: defaultStart,
       step: defaultStep
     } = SequentialIntegerGenerator.DEFAULT_CONFIG;
 
-    if (!config) {
-      return {
-        end: defaultEnd,
-        step: defaultStep,
-        start: defaultStart
-      };
-    }
-
     return {
-      end: config.end || defaultEnd,
-      step: config.step || defaultStep,
-      start: config.start || defaultStart
+      end: end || defaultEnd,
+      step: step || defaultStep,
+      start: start || defaultStart
     };
   }
 
